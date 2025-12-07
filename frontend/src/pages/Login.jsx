@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setAuth } from '../lib/auth'
 
-const API = import.meta.env.VITE_API_URL || 'https://react-shiksak-sarthi-apdp-melhqjjn9.vercel.app'
+const API = import.meta.env.VITE_API_URL || 'https://react-shiksak-sarthi.vercel.app-melhqjjn9.vercel.app'
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('')

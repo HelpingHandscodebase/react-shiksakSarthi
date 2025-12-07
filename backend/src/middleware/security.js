@@ -25,7 +25,7 @@ module.exports = function securityMiddleware(app) {
   // CORS - adjust origin as needed
   const allowedOrigins = [
     "http://localhost:5173",
-    "https://react-shiksak-sarthi-apdp.vercel.app"
+    "https://react-shiksak-sarthi.vercel.app.vercel.app"
   ];
 
   app.use(
