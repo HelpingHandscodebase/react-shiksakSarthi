@@ -24,27 +24,31 @@ module.exports = function securityMiddleware(app) {
 
   // CORS - adjust origin as needed
   const allowedOrigins = [
-    "http://localhost:5173",
-    "https://react-shiksak-sarthi.vercel.app.vercel.app"
-  ];
+  "http://localhost:5173",
+  "https://react-shiksak-sarthi.vercel.app",
+  "https://react-shiksak-sarthi-vpxo.vercel.app/"
+];
 
-  app.use(
-    cors({
-      origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
+app.use(
+  cors({
+    origin: function (origin, callback) {
 
-        if (allowedOrigins.includes(origin)) {
-          return callback(null, true);
-        }
+      // 1. Allow requests from serverless (no origin)
+      if (!origin) return callback(null, true);
 
-        return callback(new Error("Not allowed by CORS"));
-      },
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization"],
-      credentials: true,
-    })
-  );
+      // 2. Allow requests from frontend
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
 
-  app.options("*", cors());
+      // 3. Block everything else
+      return callback(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
-};
+app.options("*", cors());
+}
