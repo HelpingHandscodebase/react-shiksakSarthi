@@ -55,7 +55,10 @@ exports.list = async (req, res, next) => {
 // Optional: directly list Cloudinary resources (requires API key/secret)
 exports.listCloudinary = async (req, res, next) => {
   try {
-    const resources = await cloudinary.api.resources({ max_results: 50 });
+  // List only resources uploaded under the 'siksha' folder
+  // use prefix to restrict results to that folder. Include trailing slash to match folder path.
+  // Cloudinary requires the `type` parameter (e.g. 'upload') when listing resources.
+  const resources = await cloudinary.api.resources({ max_results: 50, prefix: 'siksha/', type: 'upload' });
     res.json(resources);
   } catch (err) {
     next(err);
