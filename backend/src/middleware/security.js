@@ -26,7 +26,7 @@ module.exports = function securityMiddleware(app) {
   const allowedOrigins = [
   "http://localhost:5173",
   "https://react-shiksak-sarthi.vercel.app",
-  "https://react-shiksak-sarthi-vpxo.vercel.app/"
+  "https://react-shiksak-sarthi-vpxo.vercel.app"
 ];
 
 app.use(
